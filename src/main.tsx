@@ -13,21 +13,20 @@ if (!PUBLISHABLE_KEY) {
     throw new Error("Missing Publishable Key")
 }
 
-
 const route = createBrowserRouter([
     { path: "/auth/signin", element: <Signin /> },
     {
         element: <App />,
         children: [
             {
-                path: "/",
-                element: <Home />
-            },
-            {
                 path: "/dashboard",
                 element: <Dashboard />
             }
         ]
+    },
+    {
+        path: "/",
+        element: <Home />
     }
 ])
 createRoot(document.getElementById("root")!).render(
@@ -40,8 +39,4 @@ createRoot(document.getElementById("root")!).render(
         </ClerkProvider>
     </StrictMode>
 )
-
-
-
-
 
