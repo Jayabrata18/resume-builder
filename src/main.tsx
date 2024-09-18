@@ -1,10 +1,47 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import App from "./App.tsx"
+import "./index.css"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import Home from "./home/Home.tsx"
+import Dashboard from "./dashboard/Dashboard.tsx"
+import { ClerkProvider } from "@clerk/clerk-react"
+import Signin from "./auth/Sign-in.tsx"
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+if (!PUBLISHABLE_KEY) {
+    throw new Error("Missing Publishable Key")
+}
+
+
+const route = createBrowserRouter([
+    { path: "/auth/signin", element: <Signin /> },
+    {
+        element: <App />,
+        children: [
+            {
+                path: "/",
+                element: <Home />
+            },
+            {
+                path: "/dashboard",
+                element: <Dashboard />
+            }
+        ]
+    }
+])
+createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+        {/* <App /> */}
+        <ClerkProvider
+            publishableKey={PUBLISHABLE_KEY}
+            afterSignOutUrl="/">
+            <RouterProvider router={route} />
+        </ClerkProvider>
+    </StrictMode>
 )
+
+
+
+
+
