@@ -7,6 +7,7 @@ import Home from "./home/Home.tsx"
 import Dashboard from "./dashboard/Dashboard.tsx"
 import { ClerkProvider } from "@clerk/clerk-react"
 import Signin from "./auth/Sign-in.tsx"
+import ResumeEdit from "./dashboard/resume/[resumeId]/edit/index.tsx"
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 if (!PUBLISHABLE_KEY) {
@@ -21,6 +22,10 @@ const route = createBrowserRouter([
             {
                 path: "/dashboard",
                 element: <Dashboard />
+            },
+            {
+                path: '/dashboard/resume/:resumeId/edit',
+                element: <ResumeEdit />
             }
         ]
     },
