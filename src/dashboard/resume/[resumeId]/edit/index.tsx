@@ -7,13 +7,6 @@ import { ResumeContextInfo } from "../../context/ResumeContextInfo"
 import dummy from "../../../../data/dummy"
 
 
-interface ResumeContextType {
-
-    resumeinfo: any;
-
-    setResumeinfo: Dispatch<SetStateAction<any>>;
-}
-export const ResumeContextInfo = createContext<ResumeContextType | null>(null)
 
 const ResumeEdit = () => {
     const params = useParams()
